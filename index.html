@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Poplink — La Royal Pop. Au poignet.</title>
+  <meta name="description" content="Le bracelet qui manquait. Rejoins la liste d'attente Poplink." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="logo">Poplink</header>
+
+  <main>
+    <h1>La Royal Pop. Au poignet.</h1>
+    <p class="sub">Le bracelet qui manquait.</p>
+
+    <p class="count"><span id="count">2&nbsp;347</span> personnes en liste d'attente</p>
+
+    <form id="form" novalidate>
+      <input id="prenom" name="prenom" type="text" placeholder="Prénom" autocomplete="given-name" required />
+      <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" required />
+      <button id="submit" type="submit">Rejoindre</button>
+      <p class="note">Pas de spam.</p>
+    </form>
+
+    <p id="success" class="success" hidden>Tu es sur la liste.</p>
+  </main>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

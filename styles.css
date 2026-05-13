@@ -1,0 +1,121 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+}
+
+.logo {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+
+.sub {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 0 48px;
+  color: #000;
+  opacity: 0.7;
+}
+
+.count {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0 0 24px;
+  opacity: 0.55;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+
+input {
+  appearance: none;
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  color: #000;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  padding: 12px 2px;
+  outline: none;
+  text-align: center;
+}
+
+input::placeholder { color: #000; opacity: 0.4; }
+input:focus { border-bottom-width: 2px; padding-bottom: 11px; }
+
+button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: #000;
+  border: none;
+  border-radius: 0;
+  padding: 16px 24px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+button:hover { opacity: 0.85; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.note {
+  font-size: 12px;
+  margin: 14px 0 0;
+  opacity: 0.45;
+}
+
+.success {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 26px; }
+  .sub { margin-bottom: 36px; }
+}

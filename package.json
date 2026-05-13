@@ -1,0 +1,9 @@
+{
+  "name": "poplink-waitlist",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Poplink waitlist landing page",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

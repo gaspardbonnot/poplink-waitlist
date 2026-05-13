@@ -1,0 +1,58 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const url = window.SUPABASE_URL;
+const key = window.SUPABASE_ANON_KEY;
+
+if (!url || !key) {
+  console.warn("Supabase non configuré : SUPABASE_URL ou SUPABASE_ANON_KEY manquant.");
+}
+
+const sb = url && key ? createClient(url, key) : null;
+
+const form = document.getElementById("form");
+const prenom = document.getElementById("prenom");
+const email = document.getElementById("email");
+const submit = document.getElementById("submit");
+const note = form.querySelector(".note");
+const success = document.getElementById("success");
+const countEl = document.getElementById("count");
+
+function setNote(text) {
+  note.textContent = text;
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!sb) {
+    setNote("Configuration manquante.");
+    return;
+  }
+
+  const p = prenom.value.trim();
+  const m = email.value.trim().toLowerCase();
+  if (!p || !m) return;
+
+  submit.disabled = true;
+  setNote("Inscription...");
+
+  const { error } = await sb.from("waitlist").insert({ prenom: p, email: m });
+
+  if (error) {
+    if (error.code === "23505" || /duplicate/i.test(error.message)) {
+      form.hidden = true;
+      success.textContent = "Tu es déjà sur la liste.";
+      success.hidden = false;
+    } else {
+      submit.disabled = false;
+      setNote("Erreur. Réessaie.");
+      console.error(error);
+    }
+    return;
+  }
+
+  const current = parseInt(countEl.textContent.replace(/\s| /g, ""), 10) || 2347;
+  countEl.textContent = (current + 1).toLocaleString("fr-FR").replace(/\s/g, " ");
+
+  form.hidden = true;
+  success.hidden = false;
+});
