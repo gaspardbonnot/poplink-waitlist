@@ -4,7 +4,7 @@ const url = window.SUPABASE_URL;
 const key = window.SUPABASE_ANON_KEY;
 
 if (!url || !key) {
-  console.warn("Supabase non configuré : SUPABASE_URL ou SUPABASE_ANON_KEY manquant.");
+  console.warn("Supabase not configured: SUPABASE_URL or SUPABASE_ANON_KEY missing.");
 }
 
 const sb = url && key ? createClient(url, key) : null;
@@ -24,7 +24,7 @@ function setNote(text) {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!sb) {
-    setNote("Configuration manquante.");
+    setNote("Configuration missing.");
     return;
   }
 
@@ -33,25 +33,25 @@ form.addEventListener("submit", async (e) => {
   if (!p || !m) return;
 
   submit.disabled = true;
-  setNote("Inscription...");
+  setNote("Joining...");
 
   const { error } = await sb.from("waitlist").insert({ prenom: p, email: m });
 
   if (error) {
     if (error.code === "23505" || /duplicate/i.test(error.message)) {
       form.hidden = true;
-      success.textContent = "Tu es déjà sur la liste.";
+      success.textContent = "You're already on the list.";
       success.hidden = false;
     } else {
       submit.disabled = false;
-      setNote("Erreur. Réessaie.");
+      setNote("Error. Try again.");
       console.error(error);
     }
     return;
   }
 
-  const current = parseInt(countEl.textContent.replace(/\s| /g, ""), 10) || 2347;
-  countEl.textContent = (current + 1).toLocaleString("fr-FR").replace(/\s/g, " ");
+  const current = parseInt(countEl.textContent.replace(/[,\s ]/g, ""), 10) || 2347;
+  countEl.textContent = (current + 1).toLocaleString("en-US");
 
   form.hidden = true;
   success.hidden = false;
